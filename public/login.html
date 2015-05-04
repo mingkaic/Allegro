@@ -1,0 +1,37 @@
+<!-- login view -->
+<div id = "account" class = "container">
+	<section ng-controller="panelCtrl">
+		<ul class = nav nav-pills>
+			<li ng-class="{ active: isSelected(1) }">
+				<a href ng-click="selectTab(1)">Log In</a> </li>
+			<li ng-class="{ active: isSelected(2) }">
+				<a href ng-click="selectTab(2)">Sign up</a> </li>
+		</ul>
+
+		<link rel="stylesheet" type="text/css" href="style.css">
+
+		<div class="panel" ng-show="isSelected(1)">
+			<form name="loginForm" ng-controller = "loginCtrl as login" 
+								   ng-submit = "loginForm.$valid && login.login()" novalidate>
+				<p><input type="text" placeholder="Email or Username" ng-model="user.id" required></p>
+				<p><input type="password" placeholder="Password" ng-model="user.password" required></p>
+				<p><input type="submit" value="Submit"></p>
+
+				<div> Input is {{loginForm.$valid}} </div>
+			</form>
+		</div>
+
+		<div class="panel" ng-show="isSelected(2)">
+			<form name="signupForm" ng-controller = "signupCtrl as signup" 
+									ng-submit = "signupForm.$valid && signup.signup()" novalidate>
+				<p><input type="text" placeholder="Username" ng-model="newuser.name" required></p>
+				<p><input type="email" placeholder="Email" ng-model="newuser.email" required></p>
+				<p><input type="password" placeholder="Password" ng-model="newuser.password" required></p>
+				<p><input type="password" placeholder="Confirm Password" ng-model="newuser.confirmPassword" required></p>
+				<p><input type="submit" value="Submit"></p>
+
+				<div> Input is {{signupForm.$valid}} </div>
+			</form>
+		</div>
+	</section>
+</div>
