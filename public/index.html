@@ -17,7 +17,7 @@
 </div>
 
 <!-- views : ajax requests-->
-<div ng-controller='viewCtrl as view'>
+<div ng-controller='viewCtrl'>
 	<login ng-show="isSelected(1)"></login>
 	<browse ng-show="isSelected(2)"></browse>
 	<manage ng-show="isSelected(3)"></manage>
@@ -30,7 +30,10 @@
 <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
 <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 
-<!--app_script-->
+<!--angular app scripts-->
 <script src="controllers/controller.js"></script>
+<script src="controllers/browseController.js"></script>
+<script src="controllers/manageController.js"></script>
+<script src="controllers/directivesController.js"></script>
 </body>
 </html>
