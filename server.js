@@ -3,12 +3,8 @@ var app = express();
 var mongojs = require('mongojs');
 var itemdb = mongojs('itemlist', ['itemlist']);
 var bodyParser = require('body-parser');
-var mongoose = require('mongoose');
 
 var port = Number(process.env.PORT || 3000);
-var config = require('./config');
-
-mongoose.connect(config.mongoUri);
 
 // access static files (html, and angular controller in public)
 app.use(express.static(__dirname+'/public'));
@@ -18,6 +14,7 @@ app.listen(port);
 // obtain mongodb data
 app.get('/itemlist', function(req, res) {
 	itemdb.itemlist.find(function(err, docs) {
+		console.log(docs);
 		res.json(docs);
 	});
 });
@@ -34,6 +31,7 @@ app.post('/itemlist', function(req, res) {
 // remove data
 app.delete('/itemlist/:id', function(req, res) {
 	var id = req.params.id;
+	console.log(id);
 	itemdb.itemlist.remove({_id: mongojs.ObjectId(id)}, function(err, doc) {
 		res.json(doc);
 	})
@@ -42,6 +40,7 @@ app.delete('/itemlist/:id', function(req, res) {
 // search data
 app.get('/itemlist/:id', function(req, res) {
 	var id = req.params.id;
+	console.log(id);
 
 	itemdb.itemlist.findOne({_id: mongojs.ObjectId(id)}, function(err, doc) {
 		res.json(doc);
@@ -51,6 +50,7 @@ app.get('/itemlist/:id', function(req, res) {
 // update data
 app.put('/itemlist/:id', function(req, res) {
 	var id = req.params.id;
+	console.log(req.body.title);
 
 	itemdb.itemlist.findAndModify({
 		query: {_id: mongojs.ObjectId(id)},
@@ -67,3 +67,5 @@ app.put('/itemlist/:id', function(req, res) {
 		}
 	);
 });
+
+console.log("listening at port "+port);
