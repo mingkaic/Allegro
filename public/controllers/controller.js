@@ -34,9 +34,9 @@ myApp.controller('loginCtrl', ['$scope', '$http', function($scope, $http) {
 }]);
 
 myApp.controller('signupCtrl', ['$scope', '$http', function($scope, $http) {
-	$scope.signup = function() {
+	this.signup = function() {
 		console.log($scope.newuser);
-		view = 2;
+		view = 3;
 	};
 }]);
 
