@@ -4,7 +4,7 @@ var mongojs = require('mongojs');
 var itemdb = mongojs('itemlist', ['itemlist']);
 var bodyParser = require('body-parser');
 
-var port = 2000;
+var port = Number(process.env.PORT || 3000);
 
 // access static files (html, and angular controller in public)
 app.use(express.static(__dirname+'/public'));
