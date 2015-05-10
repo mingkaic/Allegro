@@ -1,43 +1,35 @@
 (function (){
 
 // angular scripts
-var myApp = angular.module('myApp', ['myApp-browse', 'myApp-manager', 'myApp-directives']);
-var view;
+var myApp = angular.module('myApp', ['myApp-directives', 'myApp-browse', 'myApp-manager', 'myApp-login']);
+var views = [{article: '<login></login>'},
+			{article: '<browse></browse>'},
+			{article: '<manage></manager>'}];
+
+myApp.factory('mySharedService', function($rootScope) {
+	var sharedService = {};
+
+	sharedService.message = 0;
+
+	sharedService.prepForBroadcast = function(msg) {
+		this.message = msg;
+		this.broadcastItem();
+	};
+
+	sharedService.broadcastItem = function() {
+        $rootScope.$broadcast('handleBroadcast');
+    };
+
+	return sharedService;
+})
 
 // VIEW CONTROL
-myApp.controller('viewCtrl', ['$scope', '$http', function($scope, $http) {
-	view = 1;
+myApp.controller('viewCtrl', ['$scope', '$http', 'mySharedService', function($scope, $http, sharedService) {
+	$scope.data = views[0];
 
-	$scope.isSelected = function(checkTab) {
-		return view === checkTab;
-	}
-}]);
-
-// LOGIN VIEW
-myApp.controller('panelCtrl', ['$scope', '$http', function($scope, $http) {
-	$scope.tab = 1;
-
-	$scope.selectTab = function(setTab) {
-		$scope.tab = setTab; // click Action
-	};
-
-	$scope.isSelected = function(checkTab) {
-		return $scope.tab === checkTab;
-	}
-}]);
-
-myApp.controller('loginCtrl', ['$scope', '$http', function($scope, $http) {
-	this.login = function() {
-		console.log($scope.user);
-		view = 2;
-	};
-}]);
-
-myApp.controller('signupCtrl', ['$scope', '$http', function($scope, $http) {
-	this.signup = function() {
-		console.log($scope.newuser);
-		view = 3;
-	};
+	$scope.$on('handleBroadcast', function () {
+		$scope.data = views[sharedService.message];
+	});
 }]);
 
 })();

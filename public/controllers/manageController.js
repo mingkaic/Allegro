@@ -4,6 +4,25 @@ var myApp = angular.module('myApp-manager', []);
 
 // MANAGE VIEW
 myApp.controller('managerCtrl', ['$scope', '$http', function($scope, $http) {
+	var validate = function() {
+		if (($scope.item.title === "") || ($scope.item.author === "") || isNaN($scope.item.price)) 
+			return false;
+
+		if (isNaN($scope.item.stock)) $scope.item.stock = 0;
+		if ($scope.item.category === "") $scope.item.category = "None";
+
+		return true;
+	};
+
+	var clear = function() {
+		$scope.item = {title: "", 
+						author: "", 
+						price: NaN, 
+						stock: NaN, 
+						category: "",
+						taxable: false};
+	};
+
 	var refresh = function() {
 		$http.get('/itemlist').success(function(response) {
 			$scope.itemlist = response;
@@ -11,12 +30,15 @@ myApp.controller('managerCtrl', ['$scope', '$http', function($scope, $http) {
 	};
 
 	refresh();
+	clear();
 
 	$scope.addItem = function() {
-		console.log($scope.item);
+		if (!validate()) return;
+
 		$http.post('/itemlist', $scope.item).success(function(response) {
 			refresh();
 		});
+		clear();
 	};
 
 	$scope.removeItem = function(id) {
@@ -32,9 +54,12 @@ myApp.controller('managerCtrl', ['$scope', '$http', function($scope, $http) {
 	};
 
 	$scope.update = function() {
+		if (!validate()) return;
+		
 		$http.put('/itemlist/' + $scope.item._id, $scope.item).success(function(response) {
 			refresh();
 		});
+		clear();
 	};
 }]);
 
