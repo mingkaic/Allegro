@@ -1,12 +1,16 @@
 var express = require('express');
 var bodyParser = require('body-parser');
+var mongoose = require('mongoose');
+
+var config = require('./js/config');
+var login = require('./js/login');
+var inventory = require('./js/inventory');
 
 var app = express();
 
 var port = normalizePort(process.env.PORT || 3000);
 
-var login = require('./js/login');
-var inventory = require('./js/inventory');
+mongoose.connect(config.mongoUri);
 
 // functions I took from express-generator
 function normalizePort(val) {
