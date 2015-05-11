@@ -19,6 +19,8 @@ app.post('/login', passport.authenticate('local', {failureFlash: 'Invalid creden
 });
 
 app.post('/signup', function(req, res) {
+	console.log(req.body);
+	console.log("signing up");
 	userService.addUser(req.body, function(err) {
 		if (err) {
 			console.log(err);
