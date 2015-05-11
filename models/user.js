@@ -18,6 +18,7 @@ var userSchema = new Schema({
 	phone : String,
 	address : String,
 	city : String,
+	manager: Boolean,
 	created: {type: Date, default: Date.now}
 });
 

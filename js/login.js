@@ -4,13 +4,17 @@ var app = express();
 var userServices = require('../services/user-service');
 
 app.get('/login', function(req, res) {
+	var vm = {
+		user: null,
+		error: req.flash('error')
+	};
 	if (req.user) {
-		res.json(req);
+		vm.user = req;
 	}
-	res.json(null);
+	res.json(vm);
 })
 
-app.post('/login', passport.authenticate('local'), function(req, res) { // throw error if authentication fails
+app.post('/login', passport.authenticate('local', {failureFlash: 'Invalid credentials'}), function(req, res) { // throw error if authentication fails
 	res.json(req.body);
 });
 
