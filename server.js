@@ -43,7 +43,10 @@ app.use(expressSession(
   {
     secret: 'getting hungry',
     saveUninitialized: false,
-    resave: false
+    resave: false,
+    store: new MongoStore({
+       mongooseConnection: mongoose.connection 
+    })
   }
 ));
 
