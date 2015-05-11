@@ -4,6 +4,8 @@ var myApp = angular.module('myApp-login', []);
 
 // LOGIN VIEW
 myApp.controller('panelCtrl', ['$scope', '$http', 'mySharedService', function($scope, $http, sharedService) {
+	$http.get('/login').success
+
 	$scope.browse = function() {
 		sharedService.prepForBroadcast(1);
 	};

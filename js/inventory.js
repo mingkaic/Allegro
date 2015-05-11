@@ -53,7 +53,8 @@ app.put('/itemlist/:id', function(req, res) {
 						author: req.body.author, 
 						price: req.body.price, 
 						stock: req.body.stock, 
-						category: req.body.category}
+						category: req.body.category,
+						taxable: req.body.taxable}
 				},
 		new: true}, 
 		function(err, doc) {

@@ -29,7 +29,7 @@ userSchema.path('email').validate(function(value, next) {
 		}
 		next(!user);
 	});	
-}), 'That email is already in use');
+}, 'That email is already in use');
 
 var User = mongoose.model('User', userSchema);
 
