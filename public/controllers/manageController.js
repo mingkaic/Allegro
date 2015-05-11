@@ -3,7 +3,12 @@
 var myApp = angular.module('myApp-manager', []);
 
 // MANAGE VIEW
-myApp.controller('managerCtrl', ['$scope', '$http', function($scope, $http) {
+myApp.controller('managerCtrl', ['$scope', '$http', 'mySharedService', function($scope, $http, sharedService) {
+
+	$scope.logOut = function() {
+		sharedService.prepForBroadcast(0);
+	}
+
 	var validate = function() {
 		if (($scope.item.title === "") || ($scope.item.author === "") || isNaN($scope.item.price)) 
 			return false;

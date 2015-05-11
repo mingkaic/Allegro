@@ -1,7 +1,7 @@
 <!-- browse view -->
 <div id = "browse" class = "container" ng-controller = "browseCtrl">
-	<h1>Manage Items Inventory</h1>
-
+	<h1>Browse Items</h1>
+	<button class = "btn btn-default" ng-click = "logOut()">Log Out</button>
 	<table class = "table">
 		<thead>
 			<th>Title</th>
@@ -26,7 +26,9 @@
 						<li><a href="#">Author/Artist</a></li>
 					</ul>
 				</td>
-
+				<th>&nbsp;</th>
+				<th>&nbsp;</th>
+				<th>&nbsp;</th>
 				<td><button class = "btn btn-primary" ng-click = "searchItem()">Search Item</button></td>
 			</tr>
 			<tr ng-repeat = "item in itemlist">
