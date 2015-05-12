@@ -1,6 +1,7 @@
 /.buildpath
 /build/
 */archive/
+/node_modules/
 
 __MACOSX
 .DS_Store
@@ -11,7 +12,6 @@ __MACOSX
 .sass-cache/
 
 # OS generated files #
-######################
 */.DS_Store
 .DS_Store
 .DS_Store?

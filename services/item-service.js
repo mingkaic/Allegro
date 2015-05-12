@@ -1,4 +1,11 @@
+var mongojs = require('mongojs');
 var Item = require('../models/item').Item;
+
+exports.findAll = function(next) {
+	Item.find({}, function(err, docs) {
+		next(err, docs);
+	});
+};
 
 exports.addItem = function(item, next) {
 	var newItem = new Item({
@@ -18,18 +25,34 @@ exports.addItem = function(item, next) {
 	});
 };
 
-exports.removeItem = function(item, next) {
-
+exports.removeItem = function(itemid, next) {
+	Item.remove({_id: mongojs.ObjectId(itemid)}, function(err) {
+	    if (err) return next(err);
+	    next(null);
+	});
 };
 
-exports.findAll = function(next) {
-	Item.find({}, function(err, docs) {
+exports.findItem = function(itemid, next) {
+	Item.findOne({_id: mongojs.ObjectId(itemid)}, function(err, docs) {
 		next(err, docs);
 	});
 };
-/*
-exports.updateItem = function(item, next) {
-	User.findOne({email: email.toLowerCase()}, function(err, user) {
-		next(err, user);
+
+exports.changeItem = function(req, next) {
+	var id = mongojs.ObjectId(req.params.id);
+	Item.findAndModify({
+		query: {_id: id},
+		update: { // getting data from request body
+				 $set: {title: req.body.title,
+						author: req.body.author,
+						price: req.body.price,
+						stock: req.body.stock,
+						category: req.body.category,
+						taxable: req.body.taxable}
+				},
+		new: true
+	},
+	function(err) {
+			next(err);
 	});
-};*/
+}

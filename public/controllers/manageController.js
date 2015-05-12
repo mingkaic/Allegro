@@ -41,6 +41,7 @@ myApp.controller('managerCtrl', ['$scope', '$http', 'mySharedService', function(
 		if (!validate()) return;
 
 		$http.post('/itemlist', $scope.item).success(function(response) {
+			if (response) console.log(response);
 			refresh();
 		});
 		clear();
@@ -48,6 +49,7 @@ myApp.controller('managerCtrl', ['$scope', '$http', 'mySharedService', function(
 
 	$scope.removeItem = function(id) {
 		$http.delete('/itemlist/' + id).success(function(response) {
+			if (response) console.log(response);
 			refresh();
 		});
 	};
