@@ -55,4 +55,26 @@ exports.changeItem = function(req, next) {
 	function(err) {
 			next(err);
 	});
-}
+};
+
+exports.findOnCriteria = function(criteria, next) {
+	var searchObj = {};
+	if (criteria.title !== "")
+		searchObj.title = criteria.title;
+	if (criteria.author !== "")
+		searchObj.author = criteria.author;
+	if (!isNaN(criteria.priceMin)) {
+		searchObj.price = {};
+		searchObj.price.$gte = criteria.priceMin;
+	}
+	if (!isNaN(criteria.priceMax)) {
+		if (typeof searchObj.price == 'undefined') searchObj.price = {};
+		searchObj.price.$lte = criteria.priceMax;
+	}
+	if (criteria.category !== "none")
+		searchObj.category = criteria.category;
+
+	Item.find(searchObj, function(err, docs) {
+		next(err, docs);
+	});
+};

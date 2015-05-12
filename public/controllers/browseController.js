@@ -4,6 +4,14 @@ var myApp = angular.module('myApp-browse', []);
 
 // BROWSE VIEW
 myApp.controller('browseCtrl', ['$scope', '$http', 'mySharedService', function($scope, $http, sharedService) {
+	var clear = function() {
+		$scope.criteria = {title: "",
+						author: "",
+						priceMin: NaN,
+						priceMax: NaN,
+						category: ""};
+	};
+
 	var refresh = function() {
 		// use jquery to dynamically find and place new categories in html
 
@@ -11,7 +19,7 @@ myApp.controller('browseCtrl', ['$scope', '$http', 'mySharedService', function($
 			$scope.itemlist = response;
 		});
 
-		var signedIn = false;
+		var signedIn = true;
 		var username = "Admin"
 		if (signedIn) {
 			$scope.userMessage = 'Welcome '+username;
@@ -23,6 +31,7 @@ myApp.controller('browseCtrl', ['$scope', '$http', 'mySharedService', function($
 	};
 
 	refresh();
+	clear();
 
 	$scope.logOut = function() {
 		sharedService.prepForBroadcast(0);
@@ -30,6 +39,9 @@ myApp.controller('browseCtrl', ['$scope', '$http', 'mySharedService', function($
 
 	$scope.searchItem = function() {
 		console.log($scope.criteria);
+		$http.get('itemlist/search', $scope.criteria).success(function(response) {
+			$scope.itemlist = response;
+		});
 	}
 }]);
 

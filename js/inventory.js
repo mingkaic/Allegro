@@ -44,4 +44,12 @@ app.put('/itemlist/:id', function(req, res) {
 	res.json(null);
 });
 
+// search data
+app.get('/itemlist/search', function(req, res) {
+	itemService.findOnCriteria(req.body, function(err, docs) {
+		if (err) console.log(err);
+		res.json(docs);
+	});
+});
+
 module.exports = app;
