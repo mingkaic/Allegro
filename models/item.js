@@ -15,7 +15,8 @@ var itemSchema = new Schema({
 	price : Number,
 	stock : Number,
 	category : String,
-	isTaxable : Boolean
+	isTaxable : Boolean,
+	created: {type: Date, default: Date.now}
 });
 
 var Item = mongoose.model('Item', itemSchema);

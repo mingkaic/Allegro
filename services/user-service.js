@@ -20,10 +20,10 @@ exports.addUser = function(user, next) {
 			next(null);
 		});
 	});
-}
+};
 
 exports.findUser = function(email, next) {
 	User.findOne({email: email.toLowerCase()}, function(err, user) {
 		next(err, user);
 	});
-}
+};

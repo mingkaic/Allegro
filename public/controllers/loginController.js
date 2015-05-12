@@ -12,7 +12,7 @@ myApp.controller('panelCtrl', ['$scope', '$http', 'mySharedService', function($s
 				sharedService.prepForBroadcast(1);
 		}
 		//$scope.err = response.error;
-	})
+	});
 
 	$scope.browse = function() {
 		sharedService.prepForBroadcast(1);
@@ -47,9 +47,17 @@ myApp.controller('loginCtrl', ['$scope', '$http', 'mySharedService', function($s
 }]);
 
 myApp.controller('signupCtrl', ['$scope', '$http', 'mySharedService', function($scope, $http, sharedService) {
+	$scope.newuser = {
+		name: "", 
+		email: "", 
+		password: "", 
+		confirmPassword: "",
+		manager: false
+	};
+
 	$scope.signup = function() {
 		// authentication
-		$http.post('/signup', $scope.user).success(function(response) {
+		$http.post('/signup', $scope.newuser).success(function(response) {
 			if (response.manager) sharedService.prepForBroadcast(2);
 			else sharedService.prepForBroadcast(1);
 		});

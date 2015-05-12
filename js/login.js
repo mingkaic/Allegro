@@ -1,7 +1,7 @@
 var express = require('express');
 var passport = require('passport');
 var app = express();
-var userServices = require('../services/user-service');
+var userService = require('../services/user-service');
 
 app.get('/login', function(req, res) {
 	var vm = {
@@ -9,24 +9,37 @@ app.get('/login', function(req, res) {
 		error: req.flash('error')
 	};
 	if (req.user) {
-		vm.user = req;
+		vm.user = req.user;
 	}
 	res.json(vm);
 })
 
 app.post('/login', passport.authenticate('local', {failureFlash: 'Invalid credentials'}), function(req, res) { // throw error if authentication fails
+	console.log(req.body);
 	res.json(req.body);
 });
 
 app.post('/signup', function(req, res) {
-	console.log(req.body);
-	console.log("signing up");
-	userService.addUser(req.body, function(err) {
-		if (err) {
-			console.log(err);
+	if (req.body.confirmPassword === req.body.password) {
+		var user = {
+			username : req.body.username,
+			password : req.body.password,
+			email : req.body.email,
+			phone : "",
+			address : "",
+			city : "",
+			manager : req.body.manager
 		}
-	});
-	res.json(req.body);
+
+		userService.addUser(user, function(err) {
+			if (err) {
+				console.log(err);
+			}
+		});
+		res.json(req.body);
+	} else {
+		console.log('mismatching passwords');
+	}
 });
 
 module.exports = app;

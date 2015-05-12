@@ -2,7 +2,7 @@ module.exports = function() {
 	var passport = require('passport');
 	var passportLocal = require('passport-local');
 	var bcrypt = require('bcrypt');
-	var useService = require('../services/user-service');
+	var userService = require('../services/user-service');
 
 	passport.use(new passportLocal.Strategy({usernameField: 'email'}, function(email, password, next) {
 		userService.findUser(email, function(err, user) {
