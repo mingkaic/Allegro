@@ -10,6 +10,7 @@
 				<td>{{item.title}}</td>
 				<td>{{item.author}}</td>
 				<td>{{item.price | currency}}</td>
+				<td>{{item.desiredAmount}}</td>
 			</tr>
 		</table>
 		<p ng-if = "cart.length == 0">Empty</p>
@@ -33,13 +34,27 @@
 				<td><input type = "number" class = "form-control" ng-model="criteria.priceMin" placeholder="min price"></td>
 				<td><input type = "number" class = "form-control" ng-model="criteria.priceMax" placeholder="max price"></td>
 				<td><select ng-model="criteria.category">
-					<option selected="selected" value="none">No Category</option>
+					<option selected="selected" value="">No Category</option>
 					<!-- Use JQuery to dynamically add options -->
 					<option value="Classic">Classic</option>
 					<option value="Rock n' Roll">Rock n' Roll</option>
 				</select></td>
 				<td><button class = "btn btn-primary" ng-click = "searchItem()">Search Item</button></td>
+				<td><button class = "btn btn-primary" ng-click = "refresh()">Clear Search</button></td>
 			</tr>
+		</tbody>
+	</table>
+	<table class = "table">
+		<thead>
+			<th>Title</th>
+			<th>Artist/Author</th>
+			<th>Price</th>
+			<th>Stock</th>
+			<th>Category</th>
+			<th>Action</th>
+			<th>Quantity</th>
+		</thead>
+		<tbody>
 			<tr ng-repeat = "item in itemlist">
 				<td>{{item.title}}</td>
 				<td>{{item.author}}</td>
@@ -47,6 +62,7 @@
 				<td>{{item.stock}}</td>
 				<td>{{item.category}}</td>
 				<td><button class = "btn btn-default" ng-click = "select(item)">Add to cart</button></td>
+				<td><input type = "number" class = "form-control" ng-model="item.desiredAmount"></td>
 			</tr>
 		</tbody>
 	</table>

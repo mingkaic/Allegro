@@ -45,8 +45,9 @@ app.put('/itemlist/:id', function(req, res) {
 });
 
 // search data
-app.get('/itemlist/search', function(req, res) {
-	itemService.findOnCriteria(req.body, function(err, docs) {
+app.get('/search_itemlist/:data', function(req, res) {
+	var criteria = JSON.parse(req.params.data);
+	itemService.findOnCriteria(criteria, function(err, docs) {
 		if (err) console.log(err);
 		res.json(docs);
 	});

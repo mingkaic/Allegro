@@ -53,11 +53,14 @@ exports.changeItem = function(req, next) {
 };
 
 exports.findOnCriteria = function(criteria, next) {
-	var searchObj = {};
-	if (criteria.title !== "")
-		searchObj.title = criteria.title;
-	if (criteria.author !== "")
-		searchObj.author = criteria.author;
+	var searchObj = {
+		title: criteria.title,
+		author: criteria.author,
+		category: criteria.category
+	};
+	if (criteria.title === "") delete searchObj.title;
+	if (criteria.author === "") delete searchObj.author;
+	if (criteria.category === "") delete searchObj.category;
 	if (!isNaN(criteria.priceMin)) {
 		searchObj.price = {};
 		searchObj.price.$gte = criteria.priceMin;
@@ -66,8 +69,6 @@ exports.findOnCriteria = function(criteria, next) {
 		if (typeof searchObj.price == 'undefined') searchObj.price = {};
 		searchObj.price.$lte = criteria.priceMax;
 	}
-	if (criteria.category !== "none")
-		searchObj.category = criteria.category;
 
 	Item.find(searchObj, function(err, docs) {
 		next(err, docs);

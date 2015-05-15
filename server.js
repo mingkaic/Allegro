@@ -43,7 +43,7 @@ app.use(bodyParser.json())
 
 app.use(expressSession(
   {
-    secret: 'getting hungry',
+    secret: 'mmmmm cookie',
     saveUninitialized: false,
     resave: false,
     store: new MongoStore({

@@ -35,21 +35,26 @@ myApp.controller('browseCtrl', ['$scope', '$http', 'mySharedService', function($
 	$scope.cart = [];
 	$scope.total_price = 0;
 
+	$scope.refresh = function() {
+		refresh();
+		clear();
+	};
+
 	$scope.logOut = function() {
 		sharedService.prepForBroadcast(0);
 	};
 
 	$scope.searchItem = function() {
-		console.log($scope.criteria);
-		$http.get('itemlist/search', $scope.criteria).success(function(response) {
+		var jsonData = JSON.stringify($scope.criteria);
+		$http.get('/search_itemlist/'+jsonData).success(function(response) {
 			$scope.itemlist = response;
 		});
 	};
 
 	$scope.select = function(item) {
+		if (isNaN(item.desiredAmount) || item.desiredAmount <= 0 || item.desiredAmount > item.stick) return;
 		$scope.cart.push(item);
-		$scope.total_price += item.price;
-		refresh();
+		$scope.total_price += item.price*item.desiredAmount;
 	};
 
 	$scope.buyCart = function() {
