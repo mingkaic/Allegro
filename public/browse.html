@@ -3,6 +3,19 @@
 	<h1>Browse Items</h1>
 	<p>{{userMessage}}</p>
 	<button class = "btn btn-default" ng-click = "logOut()">{{loginAccessMessage}}</button>
+	<h2>Cart</h2>
+	<div>
+		<table class = "table" ng-if = "cart.length > 0">
+			<tr ng-repeat = "item in cart">
+				<td>{{item.title}}</td>
+				<td>{{item.author}}</td>
+				<td>{{item.price | currency}}</td>
+			</tr>
+		</table>
+		<p ng-if = "cart.length == 0">Empty</p>
+		<p>Price : {{total_price | currency}}</p>
+		<button class = "btn btn-default" ng-click = "buyCart()">Buy</button>
+	</div>
 	<table class = "table">
 		<thead>
 			<th>Title</th>
@@ -33,6 +46,7 @@
 				<td>{{item.price | currency}}</td>
 				<td>{{item.stock}}</td>
 				<td>{{item.category}}</td>
+				<td><button class = "btn btn-default" ng-click = "select(item)">Add to cart</button></td>
 			</tr>
 		</tbody>
 	</table>

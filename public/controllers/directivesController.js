@@ -4,9 +4,30 @@ var myApp = angular.module('myApp-directives', []);
 
 myApp.directive('login', ['$compile', function($compile) {
 	return {
-		restrict: 'E', // new html element
+		restrict: 'E',
 		templateUrl: 'login.html',
 	};
+}]);
+
+myApp.directive('browse', ['$compile', function($compile) {
+	return {
+		restrict: 'E',
+		templateUrl: 'browse.html'
+	};
+}]);
+
+myApp.directive('manage', ['$compile', function($compile) {
+	return {
+		restrict: 'E',
+		templateUrl: 'manage.html'
+	};
+}]);
+
+myApp.directive('transaction', ['$compile', function($compile) {
+  return {
+    restrict: 'E',
+    templateUrl: 'transaction.html',
+  };
 }]);
 
 myApp.directive('compile', ['$compile', function ($compile) {
@@ -21,28 +42,12 @@ myApp.directive('compile', ['$compile', function ($compile) {
               // assign it into the current DOM
               element.html(value);
 
-              // compile the new DOM and link it to the current
-              // scope.
-              // NOTE: we only compile .childNodes so that
-              // we don't get into infinite loop compiling ourselves
+              // compile the new DOM and link it to the current scope.
+              // NOTE: we only compile .childNodes so that we don't get into infinite loop compiling ourselves
               $compile(element.contents())(scope);
             }
         );
     };
 }]);
-
-myApp.directive('browse', function() {
-	return {
-		restrict: 'E', // new html element
-		templateUrl: 'browse.html'
-	};
-});
-
-myApp.directive('manage', function() {
-	return {
-		restrict: 'E', // new html element
-		templateUrl: 'manage.html'
-	};
-});
 
 })();
