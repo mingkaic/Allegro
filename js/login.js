@@ -12,9 +12,10 @@ app.get('/login', function(req, res) {
 		vm.user = req.user;
 	}
 	res.json(vm);
-})
+});
 
 app.post('/login', passport.authenticate('local', {failureFlash: 'Invalid credentials'}), function(req, res) { // throw error if authentication fails
+	req.flash('error');
 	console.log(req.body);
 	res.json(req.body);
 });
