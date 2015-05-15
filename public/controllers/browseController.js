@@ -52,7 +52,7 @@ myApp.controller('browseCtrl', ['$scope', '$http', 'mySharedService', function($
 	};
 
 	$scope.select = function(item) {
-		if (isNaN(item.desiredAmount) || item.desiredAmount <= 0 || item.desiredAmount > item.stick) return;
+		if (isNaN(item.desiredAmount) || item.desiredAmount <= 0 || item.desiredAmount > item.stick) item.desiredAmount = 1;
 		$scope.cart.push(item);
 		$scope.total_price += item.price*item.desiredAmount;
 	};

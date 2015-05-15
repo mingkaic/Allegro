@@ -6,20 +6,15 @@ module.exports = function() {
 
 	passport.use(new passportLocal.Strategy({usernameField: 'email'}, function(email, password, next) {
 		userService.findUser(email, function(err, user) {
-			console.log(user);
-			if (err) {
+			if (err)
 				return next(err);
-			}
-			if (!user) {
+			if (!user)
 				return next(null, null);
-			}
 			bcrypt.compare(password, user.password, function(err, same) {
-				if (err) {
+				if (err)
 					return next(err);
-				}
-				if (!same) {
+				if (!same)
 					return (null, null);
-				}
 				next(null, user);
 			});
 		});

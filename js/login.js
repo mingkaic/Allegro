@@ -1,5 +1,6 @@
 var express = require('express');
 var passport = require('passport');
+var bcrypt = require('bcrypt');
 var app = express();
 var userService = require('../services/user-service');
 
@@ -14,10 +15,22 @@ app.get('/login', function(req, res) {
 	res.json(vm);
 });
 
-app.post('/login', passport.authenticate('local', {failureFlash: 'Invalid credentials'}), function(req, res) { // throw error if authentication fails
-	req.flash('error');
-	console.log(req.body);
-	res.json(req.body);
+app.post('/login', function(req, res) {
+	userService.findUser(req.body.id, function(err, user) {
+		if (err)
+			return res.json(err);
+		if (!user)
+			return res.json(null);
+		if (req.body.manager && !user.manager)
+			res.json(null);
+		bcrypt.compare(req.body.password, user.password, function(err, same) {
+			if (err)
+				return res.json(err);
+			if (!same)
+				return res.json(null);
+			res.json(user);
+		});
+	});
 });
 
 app.post('/signup', function(req, res) {
@@ -40,6 +53,7 @@ app.post('/signup', function(req, res) {
 		res.json(req.body);
 	} else {
 		console.log('mismatching passwords');
+		res.json(null);
 	}
 });
 

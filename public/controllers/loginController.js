@@ -39,7 +39,11 @@ myApp.controller('loginCtrl', ['$scope', '$http', 'mySharedService', function($s
 	$scope.login = function() {
 		// authentication
 		$http.post('/login', $scope.user).success(function(response) {
-			if (response.manager) sharedService.prepForBroadcast(2);
+			if (!response) {
+				console.log("error"); 
+				return;
+			}
+			if (response.manager && $scope.manager) sharedService.prepForBroadcast(2);
 			else sharedService.prepForBroadcast(1);
 		}).error(function(response) {
 			console.log(response);
