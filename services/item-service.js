@@ -40,20 +40,15 @@ exports.findItem = function(itemid, next) {
 
 exports.changeItem = function(req, next) {
 	var id = mongojs.ObjectId(req.params.id);
-	Item.findAndModify({
-		query: {_id: id},
-		update: { // getting data from request body
-				 $set: {title: req.body.title,
-						author: req.body.author,
-						price: req.body.price,
-						stock: req.body.stock,
-						category: req.body.category,
-						taxable: req.body.taxable}
-				},
-		new: true
-	},
-	function(err) {
-			next(err);
+	Item.update({_id: id}, {
+		title: req.body.title,
+		author: req.body.author,
+		price: req.body.price,
+		stock: req.body.stock,
+		category: req.body.category,
+		taxable: req.body.taxable
+	}, function(err, numberAffected, rawResponse) {
+		next(err);
 	});
 };
 

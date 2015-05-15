@@ -38,7 +38,7 @@ app.get('/itemlist/:id', function(req, res) {
 
 // update data
 app.put('/itemlist/:id', function(req, res) {
-	itemService.findAndModify(req, function(err) {
+	itemService.changeItem(req, function(err) {
 		if (err) return res.json(err);
 	});
 	res.json(null);
