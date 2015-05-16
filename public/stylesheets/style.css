@@ -5,3 +5,11 @@
 .ng-valid.ng-dirty {
 	border-color: green;
 }
+
+p.blocktext {
+	font: 8px;
+	bottom: 0;
+    margin-left: auto;
+    margin-right: auto;
+    width: 10em
+}

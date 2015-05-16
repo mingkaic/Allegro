@@ -1,5 +1,13 @@
 <!-- browse view -->
 <div id = "browse" class = "container" ng-controller = "browseCtrl">
+	<div>
+		<p>
+			Currently, searching up/filtering via title, and artist/author is exact format only. Example: To find Beyonce's music, Beyonce's name must be spelt exactly as how the server stores it (no accent on the first 'e').
+		</p>
+		<p>
+			The transaction portion currently does not work.
+		</p>
+	</div>
 	<h1>Browse Items</h1>
 	<p>{{userMessage}}</p>
 	<button class = "btn btn-default" ng-click = "logOut()">{{loginAccessMessage}}</button>

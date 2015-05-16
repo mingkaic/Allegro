@@ -1,5 +1,19 @@
 <!-- login view -->
 <div id = "account" class = "container">
+	<div>
+		<p> Welcome to Allegro Music Store. </p>
+		<p>
+			Allegro Music Store is a fictitious music store fabricated with the intent to demonstrate demonstrate MEAN Stack technology.
+			This single-page web application is designed using custom Angular directives and compile. Express and Node modules are used in the backend to communicate with Mongo database.
+		</p>
+		<p>
+			For demonstration purposes, anybody can sign-up as a manager.
+			A manager has access to both the manager's inventory view and the browser view.
+			The inventory view allows the user to modify the entire shop's item inventory. This view can be accessed by checking the is Manager option in both signing in and logging on screens.
+			The browser view allows the user to filter items and purchase any available items.
+			By default (without signing as a manager), any user can access the browser view.
+		</p>
+	</div>
 	<section ng-controller="panelCtrl">
 		<button ng-click = "browse()">Start browsing without signing in</button>
 		<ul class = nav nav-pills>
