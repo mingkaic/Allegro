@@ -7,7 +7,7 @@ var myApp = angular.module('myApp',
 		'myApp-browse', 
 		'myApp-manager', 
 		'myApp-login', 
-		/*'myApp-transaction',*/
+		/*'myApp-transaction'*/
 	]);
 var views = [{article: '<login></login>'},
 			{article: '<browse></browse>'},
@@ -17,10 +17,10 @@ var views = [{article: '<login></login>'},
 myApp.factory('mySharedService', function($rootScope) {
 	var sharedService = {};
 
-	sharedService.message = 0;
+	sharedService.view = 0;
 
 	sharedService.prepForBroadcast = function(msg) {
-		this.message = msg;
+		this.view = msg;
 		this.broadcastItem();
 	};
 
@@ -31,14 +31,28 @@ myApp.factory('mySharedService', function($rootScope) {
 	return sharedService;
 });
 
+myApp.factory('cartShareService', function($rootScope) {
+	var sharedService = {};
+
+	sharedService.cart = [];
+
+	sharedService.prepForBroadcast = function(msg) {
+		this.cart = msg;
+		this.broadcastItem();
+	};
+
+	sharedService.broadcastItem = function() {
+        $rootScope.$broadcast('handleCartBroadcast');
+    };
+
+	return sharedService;
+});
+
 // VIEW CONTROL
 myApp.controller('viewCtrl', ['$scope', '$http', 'mySharedService', function($scope, $http, sharedService) {
 	$scope.data = views[0];
 	$scope.$on('handleBroadcast', function () {
-		if (typeof sharedService.message === 'number')
-			$scope.data = views[sharedService.message];
-		else
-			$scope.data = views[sharedService.message.view];
+		$scope.data = views[sharedService.view];
 	});
 }]);
 

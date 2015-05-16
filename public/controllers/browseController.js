@@ -3,7 +3,7 @@
 var myApp = angular.module('myApp-browse', []);
 
 // BROWSE VIEW
-myApp.controller('browseCtrl', ['$scope', '$http', 'mySharedService', function($scope, $http, sharedService) {
+myApp.controller('browseCtrl', ['$scope', '$http', 'mySharedService', 'cartShareService', function($scope, $http, sharedService) {
 	var clear = function() {
 		$scope.criteria = {title: "",
 						author: "",
@@ -58,7 +58,8 @@ myApp.controller('browseCtrl', ['$scope', '$http', 'mySharedService', function($
 	};
 
 	$scope.buyCart = function() {
-		sharedService.prepForBroadcast({view: 3, cart: $scope.cart});
+		sharedService.prepForBroadcast(3)
+		cartShareService.prepForBroadcast($scope.cart);
 	};
 }]);
 
