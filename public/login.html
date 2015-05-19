@@ -24,28 +24,49 @@
 		</ul>
 
 		<div class="control-group error" ng-show="isSelected(1)">
-			<form name="loginForm" ng-controller = "loginCtrl" 
-								   ng-submit = "loginForm.$valid && login()" novalidate>
-				<p><input type="text" placeholder="Email or Username" ng-model="user.id" required></p>
-				<p><input type="password" placeholder="Password" ng-model="user.password" required></p>
+			<form name="loginForm" ng-controller = "loginCtrl" ng-submit = "loginForm.$valid && login()" novalidate>
+				<div class="controls">
+					<input type="text" placeholder="Email or Username" ng-model="user.id" required>
+				</div>
+				<div class="controls">
+					<input type="password" placeholder="Password" ng-model="user.password" required>
+				</div>
+				<div class="controls"> 
+					<label class="label label-default">Manager Login</label>
+					<input type='checkbox' ng-model="user.manager">
+				</div>
 
-				<p><input type='checkbox' ng-model="user.manager"> is Manager?</p>
-
-				<p><input type="submit" value="Submit"></p>
+				<div class="control-group error">
+					<div class="controls">
+						<input type="submit" value="Submit">
+						<span class="help-inline">{{error}}</span>
+					</div>
+				</div>
 			</form>
 		</div>
 
 		<div class="panel" ng-show="isSelected(2)">
-			<form name="signupForm" ng-controller = "signupCtrl" 
-									ng-submit = "signupForm.$valid && signup()" novalidate>
-				<p><input type="text" placeholder="Username" ng-model="newuser.name" required></p>
-				<p><input type="email" placeholder="Email" ng-model="newuser.email" required></p>
-				<p><input type="password" placeholder="Password" ng-model="newuser.password" required></p>
-				<p><input type="password" placeholder="Confirm Password" ng-model="newuser.confirmPassword" required></p>
-
-				<p><input type='checkbox' ng-model="newuser.manager" value=false> is Manager?</p>
-
-				<p><input type="submit" value="Submit"></p>
+			<form name="signupForm" ng-controller = "signupCtrl" ng-submit = "signupForm.$valid && signup()" novalidate>
+				<div class="controls">
+					<input type="text" placeholder="Username" ng-model="newuser.name" required>
+				</div>
+				<div class="controls">
+					<input type="email" placeholder="Email" ng-model="newuser.email" required>
+				</div>
+				<div class="controls">
+					<input type="password" placeholder="Password" ng-model="newuser.password" required>
+				</div>
+				<div class="controls">
+					<input type="password" placeholder="Confirm Password" ng-model="newuser.confirmPassword" required>
+				</div>
+				<div class="controls">
+					<label class="label label-default">Manager Status</label>
+					<input type='checkbox' ng-model="newuser.manager" value=false>
+				</div>
+				<div class="controls">
+					<input type="submit" value="Submit">
+					<span class="help-inline">{{error}}</span>
+				</div>
 			</form>
 		</div>
 	</section>

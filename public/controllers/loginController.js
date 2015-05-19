@@ -26,7 +26,7 @@ myApp.controller('panelCtrl', ['$scope', '$http', 'mySharedService', function($s
 
 	$scope.isSelected = function(checkTab) {
 		return $scope.tab === checkTab;
-	}
+	};
 }]);
 
 myApp.controller('loginCtrl', ['$scope', '$http', 'mySharedService', function($scope, $http, sharedService) {
@@ -40,22 +40,22 @@ myApp.controller('loginCtrl', ['$scope', '$http', 'mySharedService', function($s
 		// authentication
 		$http.post('/login', $scope.user).success(function(response) {
 			if (!response) {
-				console.log("error"); 
+				$scope.error = "incorrect username/email or password";
 				return;
 			}
 			if (response.manager && $scope.manager) sharedService.prepForBroadcast(2);
 			else sharedService.prepForBroadcast(1);
 		}).error(function(response) {
-			console.log(response);
+			$scope.error = response;
 		});
 	};
 }]);
 
 myApp.controller('signupCtrl', ['$scope', '$http', 'mySharedService', function($scope, $http, sharedService) {
 	$scope.newuser = {
-		name: "", 
-		email: "", 
-		password: "", 
+		name: "",
+		email: "",
+		password: "",
 		confirmPassword: "",
 		manager: false
 	};
@@ -63,8 +63,16 @@ myApp.controller('signupCtrl', ['$scope', '$http', 'mySharedService', function($
 	$scope.signup = function() {
 		// authentication
 		$http.post('/signup', $scope.newuser).success(function(response) {
+			console.log(response);
+			if (typeof response === "string") {
+				$scope.error = response;
+				return;
+			}
+
 			if (response.manager) sharedService.prepForBroadcast(2);
 			else sharedService.prepForBroadcast(1);
+		}).error(function(response) {
+			$scope.error = response;
 		});
 	};
 }]);

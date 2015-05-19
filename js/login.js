@@ -43,17 +43,15 @@ app.post('/signup', function(req, res) {
 			address : "",
 			city : "",
 			manager : req.body.manager
-		}
+		};
 
 		userService.addUser(user, function(err) {
-			if (err) {
-				console.log(err);
-			}
+			res.json(err);
 		});
+
 		res.json(req.body);
 	} else {
-		console.log('mismatching passwords');
-		res.json(null);
+		res.json('passwords do not match');
 	}
 });
 

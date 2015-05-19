@@ -25,7 +25,7 @@ exports.addUser = function(user, next) {
 exports.findUser = function(id, next) {
 	User.findOne({email: id.toLowerCase()}, function(err, user) {
 		if (user) return next(err, user);
-		User.findOne({username: id.toLowerCase()}, function(err, user) {
+		User.findOne({username: id}, function(err, user) {
 			next(err, user);
 		});
 	});
