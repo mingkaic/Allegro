@@ -23,7 +23,7 @@
 				<a href ng-click="selectTab(2)">Sign up</a> </li>
 		</ul>
 
-		<div class="panel" ng-show="isSelected(1)">
+		<div class="control-group error" ng-show="isSelected(1)">
 			<form name="loginForm" ng-controller = "loginCtrl" 
 								   ng-submit = "loginForm.$valid && login()" novalidate>
 				<p><input type="text" placeholder="Email or Username" ng-model="user.id" required></p>
