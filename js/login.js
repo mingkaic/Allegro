@@ -46,10 +46,13 @@ app.post('/signup', function(req, res) {
 		};
 
 		userService.addUser(user, function(err) {
-			res.json(err);
+			if (err) {
+				console.log(err);
+				res.json(err.errors.email.message);
+			}
+			else res.json(req.body);
 		});
 
-		res.json(req.body);
 	} else {
 		res.json('passwords do not match');
 	}
