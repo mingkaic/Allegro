@@ -20,7 +20,7 @@ myApp.controller('browseCtrl', ['$scope', '$http', 'mySharedService', 'cartShare
 		});
 
 		var signedIn = true;
-		var username = "Admin"
+		var username = "Admin";
 		if (signedIn) {
 			$scope.userMessage = 'Welcome '+username;
 			$scope.loginAccessMessage = 'log out';

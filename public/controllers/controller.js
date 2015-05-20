@@ -56,4 +56,10 @@ myApp.controller('viewCtrl', ['$scope', '$http', 'mySharedService', function($sc
 	});
 }]);
 
+myApp.controller('navCtrl', ['$scope', '$http', 'mySharedService', function($scope, $http, sharedService) {
+	$scope.changeView = function(view) {
+		sharedService.prepForBroadcast(view);
+	};
+}]);
+
 })();

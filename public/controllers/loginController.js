@@ -14,10 +14,6 @@ myApp.controller('panelCtrl', ['$scope', '$http', 'mySharedService', function($s
 		//$scope.err = response.error;
 	});
 
-	$scope.browse = function() {
-		sharedService.prepForBroadcast(1);
-	};
-
 	$scope.tab = 1;
 
 	$scope.selectTab = function(setTab) {
