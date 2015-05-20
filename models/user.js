@@ -22,14 +22,24 @@ var userSchema = new Schema({
 	created: {type: Date, default: Date.now}
 });
 
-userSchema.path('email').validate(function(value, next) {
-	userService.findUser(value, function(err, user) {
+userSchema.path('username').validate(function(username, next) {
+	userService.existingUsername(username, function(err, user) {
 		if (err) {
 			console.log(err);
 			return next(false);
 		}
 		next(!user);
-	});	
+	});
+}, 'That username is already in use');
+
+userSchema.path('email').validate(function(email, next) {
+	userService.existingEmail(email, function(err, user) {
+		if (err) {
+			console.log(err);
+			return next(false);
+		}
+		next(!user);
+	});
 }, 'That email is already in use');
 
 var User = mongoose.model('User', userSchema);

@@ -40,7 +40,12 @@ app.post('/signup', function(req, res) {
 			city : "",
 			manager : req.body.manager
 		};
-		console.log(user);
+
+		userService.findUser(user.username, function(err, user) {
+			console.log(err);
+			console.log(user===null);
+		});
+
 		userService.addUser(user, function(err) {
 			if (err) {
 				console.log(err);
