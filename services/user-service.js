@@ -23,7 +23,7 @@ exports.addUser = function(user, next) {
 };
 
 exports.findUser = function(id, next) {
-	User.find({$or:[{username: id}, {email: id.toLowerCase()}]}, function(err, user) {
+	User.find({$or:[{username: id.toLowerCase()}, {email: id.toLowerCase()}]}, function(err, user) {
 		if (user.length === 0) user = null;
 		else user = user[0]; // assuming that usernames are unique
 		return next(err, user);
@@ -32,13 +32,13 @@ exports.findUser = function(id, next) {
 
 // we're assuming that usernames can look like emails, otherwise we might as well use findUser
 exports.existingUsername = function(username, next) {
-	User.findOne({username: username}, function(err, user) {
+	User.findOne({username: username.toLowerCase()}, function(err, user) {
 		next(err, user);
 	});
 };
 
 exports.existingEmail = function(email, next) {
-	User.findOne({email: email}, function(err, user) {
+	User.findOne({email: email.toLowerCase()}, function(err, user) {
 		next(err, user);
 	});
 };
