@@ -39,6 +39,7 @@ myApp.controller('loginCtrl', ['$scope', '$http', 'mySharedService', function($s
 	$scope.login = function() {
 		// authentication
 		$http.post('/login', $scope.user).success(function(response) {
+			console.log(response);
 			if (typeof response === "string") {
 				$scope.error = response;
 				return;
@@ -53,7 +54,7 @@ myApp.controller('loginCtrl', ['$scope', '$http', 'mySharedService', function($s
 
 myApp.controller('signupCtrl', ['$scope', '$http', 'mySharedService', function($scope, $http, sharedService) {
 	$scope.newuser = {
-		name: "",
+		username: "",
 		email: "",
 		password: "",
 		confirmPassword: "",

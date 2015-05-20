@@ -40,7 +40,7 @@ app.post('/signup', function(req, res) {
 			city : "",
 			manager : req.body.manager
 		};
-
+		console.log(user);
 		userService.addUser(user, function(err) {
 			if (err) {
 				console.log(err);
