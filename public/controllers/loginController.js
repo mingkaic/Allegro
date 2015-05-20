@@ -39,8 +39,8 @@ myApp.controller('loginCtrl', ['$scope', '$http', 'mySharedService', function($s
 	$scope.login = function() {
 		// authentication
 		$http.post('/login', $scope.user).success(function(response) {
-			if (!response) {
-				$scope.error = "incorrect username/email or password";
+			if (typeof response === "string") {
+				$scope.error = response;
 				return;
 			}
 			if (response.manager && $scope.manager) sharedService.prepForBroadcast(2);

@@ -17,17 +17,13 @@ app.get('/login', function(req, res) {
 
 app.post('/login', function(req, res) {
 	userService.findUser(req.body.id, function(err, user) {
-		if (err)
-			return res.json(err);
-		if (!user)
-			return res.json(null);
-		if (req.body.manager && !user.manager)
-			res.json(null);
+		if (err) return res.json(err);
+		if (!user) return res.json("Incorrect username/email or password");
+		if (req.body.manager && !user.manager) res.json("Does not have management permission");
+
 		bcrypt.compare(req.body.password, user.password, function(err, same) {
-			if (err)
-				return res.json(err);
-			if (!same)
-				return res.json(null);
+			if (err) return res.json(err);
+			if (!same) return res.json("Incorrect username/email or password");
 			res.json(user);
 		});
 	});
