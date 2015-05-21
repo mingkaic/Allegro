@@ -12,5 +12,5 @@ var checksNav = function() {
 
 $(document).ready(function() {
 	checksNav();
-	$(document).on("click", checksNav());
+	$("nav").on("click", checksNav());
 });

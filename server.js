@@ -39,7 +39,7 @@ function normalizePort(val) {
 
 // access static files (html, and angular controller in public)
 app.use(express.static(__dirname+'/public'));
-app.use(bodyParser.json())
+app.use(bodyParser.json());
 
 app.use(expressSession(
   {
@@ -47,7 +47,7 @@ app.use(expressSession(
     saveUninitialized: false,
     resave: false,
     store: new MongoStore({
-       mongooseConnection: mongoose.connection 
+       mongooseConnection: mongoose.connection
     })
   }
 ));
