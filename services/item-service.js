@@ -27,8 +27,8 @@ exports.addItem = function(item, next) {
 
 exports.removeItem = function(itemid, next) {
 	Item.remove({_id: mongojs.ObjectId(itemid)}, function(err) {
-	    if (err) return next(err);
-	    next(null);
+		if (err) return next(err);
+		next(null);
 	});
 };
 

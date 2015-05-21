@@ -10,8 +10,6 @@ exports.addUser = function(user, next) {
 			password : hash,
 			email : user.email.toLowerCase(),
 			phone : user.phone,
-			address : user.address,
-			city : user.city,
 			manager : user.manager
 		});
 

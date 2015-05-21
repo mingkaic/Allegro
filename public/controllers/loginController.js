@@ -40,7 +40,9 @@ myApp.controller('loginCtrl', ['$scope', '$http', 'mySharedService', function($s
 				$scope.error = response;
 				return;
 			}
-			if (response.manager && $scope.manager) sharedService.prepForBroadcast(2);
+			if (response.manager && $scope.user.manager) {
+				sharedService.prepForBroadcast(2);
+			}
 			else sharedService.prepForBroadcast(1);
 		}).error(function(response) {
 			$scope.error = response;

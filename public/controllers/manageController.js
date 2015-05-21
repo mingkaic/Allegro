@@ -61,9 +61,8 @@ myApp.controller('managerCtrl', ['$scope', '$http', 'mySharedService', function(
 	};
 
 	$scope.update = function() {
-		debugger;
 		if (!validate()) return;
-		
+
 		$http.put('/itemlist/' + $scope.item._id, $scope.item).success(function(response) {
 			refresh();
 		});

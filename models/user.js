@@ -16,10 +16,11 @@ var userSchema = new Schema({
 		required: 'Please enter your email'
 	},
 	phone : String,
-	address : String,
-	city : String,
-	manager: Boolean,
-	created: {type: Date, default: Date.now}
+	manager : Boolean,
+	created : {
+		type : Date,
+		default : Date.now
+	}
 });
 
 userSchema.path('username').validate(function(username, next) {

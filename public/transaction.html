@@ -1,12 +1,23 @@
 <!-- transaction view -->
 <div id = "transaction" class = "container" ng-controller = "transactionCtrl">
-	<h1>You are purchasing the following items: </h1>
-	<table class = "table" ng-if = "cart.length > 0">
-		<tr ng-repeat = "item in cart">
-			<td>{{item.title}}</td>
-			<td>{{item.author}}</td>
-			<td>{{item.price | currency}}</td>
+	<div class="container">
+		<h1>You are purchasing the following items: </h1>
+		<table class = "table" ng-if = "cart.length > 0">
+			<tr ng-repeat = "item in cart">
+				<td>{{item.title}}</td>
+				<td>{{item.author}}</td>
+				<td>{{item.price | currency}}</td>
+			</tr>
+		</table>
+		<p ng-if = "cart.length == 0">Empty</p>
+	</div>
+	<div class="container">
+		<tr>
+			<td><select ng-model="paymentType">
+				<option selected="selected" value="visa">Visa</option>
+				<option value="paypal">Paypal</option>
+				<option value="master">Master</option>
+			</select></td>
 		</tr>
-	</table>
-	<p ng-if = "cart.length == 0">Empty</p>
+	</div>
 </div>

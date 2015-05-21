@@ -4,31 +4,25 @@
 	<!--boostrap-->
 	<!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="https://bootswatch.com/yeti/bootstrap.min.css">
-
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-
-	<!-- Optional theme -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
 
 	<link rel="stylesheet" type="text/css" href="stylesheets/style.css">
 
-	<link rel="stylesheet" type="text/css" href="stylesheets/globalheader.css">
-
 	<title>Allegro Music Store</title>
 </head>
 <body>
-<nav id="globalheader" class="globalheader" ng-controller = "navCtrl">
+<nav id="globalheader" ng-controller = "navCtrl">
 	<div class="navbar-header">
-		Allegro
+		<a class="navbar-brand">Allegro</a>
 	</div>
 	<div class="navbar-collapse collapse">
 		<ul class="nav navbar-nav">
-			<li>
-				<a href ng-click="changeView(1)">Browse the Shop</a>
-			</li>
+			<li><a href ng-click="changeView(1)">Browse the Shop</a></li>
+			<li><a href ng-click>Manage the Shop</a></li>
 		</ul>
 		<ul class="nav navbar-nav navbar-right">
-			
+			<li id="userInfo"><a href ng-click>Login</a></li>
 		</ul>
 	</div>
 </nav>
@@ -36,7 +30,7 @@
 	<div class="box">
 		<!-- views : ajax requests-->
 		<div class="container" ng-controller='viewCtrl'>
-			<div compile="data.article"></div>
+			<div id="dynamicView" compile="data.article"></div>
 		</div>
 	</div>
 
@@ -61,6 +55,8 @@
 <!--jquery-->
 <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
 <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+
+<script src="globalNav.js"></script>
 
 <!--angular app scripts-->
 <script src="controllers/controller.js"></script>
