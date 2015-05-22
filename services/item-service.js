@@ -9,8 +9,6 @@ exports.findAll = function(next) {
 
 exports.addItem = function(item, next) {
 	var newItem = new Item({
-		UPC : "",
-		storeID : "",
 		title : item.title,
 		author : item.author,
 		price : item.price,

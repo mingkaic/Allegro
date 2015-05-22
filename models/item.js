@@ -2,21 +2,28 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var itemSchema = new Schema({
-	UPC : {
-		type: String,
-		require: true
+	title : {
+		type : String,
+		required : "please enter the title"
 	},
-	storeID : {
-		type: String,
-		require: true
+	author : {
+		type : String,
+		required : "please enter the author"
 	},
-	title : String,
-	author : String,
-	price : Number,
-	stock : Number,
+	price : {
+		type : Number,
+		required : "please enter the price"
+	},
+	stock : {
+		type : Number,
+		default : 0
+	},
 	category : String,
 	isTaxable : Boolean,
-	created: {type: Date, default: Date.now}
+	created : {
+		type : Date,
+		default : Date.now
+	}
 });
 
 var Item = mongoose.model('Item', itemSchema);
