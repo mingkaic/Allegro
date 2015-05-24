@@ -1,3 +1,9 @@
+body {
+	background-image: url("../images/parchment.jpg");
+	background-size: cover;
+    background-repeat: no-repeat;
+}
+
 .ng-invalid.ng-dirty {
 	border-color: red;
 }
