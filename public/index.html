@@ -19,17 +19,17 @@
 	<div class="navbar-collapse collapse">
 		<ul class="nav navbar-nav">
 			<li><a href ng-click="changeView(1)">Browse the Shop</a></li>
-			<li><a href ng-click>Manage the Shop</a></li>
+			<li><a href>Manage the Shop</a></li>
 		</ul>
 		<ul class="nav navbar-nav navbar-right">
-			<li id="userInfo"><a href ng-click>Login</a></li>
+			<li id="userInfo" ng-click="changeView(0)"><a href ng-click>Login</a></li>
 		</ul>
 	</div>
 </nav>
 <div class="container">
 	<div id="content" class="box">
 		<!-- views : ajax requests-->
-		<div class="container" ng-controller='viewCtrl'>
+		<div ng-controller='viewCtrl'>
 			<div id="dynamicView" compile="data.article"></div>
 		</div>
 	</div>
@@ -38,7 +38,7 @@
 		<div class="box">
 				<div class="container">
 					<div class="row">
-						2015 
+						2015 @
 						<a target="blank" href="mingkaichen2009@gmail.com">
 							Ming Kai Chen
 						</a>
